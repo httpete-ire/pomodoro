@@ -2,7 +2,7 @@
 <html lang="en" ng-app="pomodoro" ng-controller="MainCtrl as mainCtrl">
 <head>
     <meta charset="UTF-8">
-    <title>{{mainCtrl.title}}</title>
+    <title>{{mainCtrl.time}}</title>
 
     <!-- bower:css -->
     <!-- endbower -->
@@ -12,7 +12,7 @@
     <!-- endinject -->
 
 </head>
-<body>
+<body ng-class="[mainCtrl.states.background]">
 
     <div ng-include src="'./dev/templates/main.html'" ></div>
 
@@ -25,6 +25,7 @@
     <script src="dev/js/controllers/main.js"></script>
     <script src="dev/js/factory/pomodoro.js"></script>
     <script src="dev/js/services/timer.js"></script>
+    <script src="dev/js/services/TimeParser.js"></script>
     <script src="dev/js/utility/timer-worker.js"></script>
     <!-- endinject -->
 

@@ -15,12 +15,14 @@
      *
      * @ngInject
      */
-    function Pomodoro (Timer) {
+    function Pomodoro (Timer, $rootScope) {
+
+        var timerType;
 
         var times = {
-            short_break: 3,
-            long_break: 9,
-            active: 15
+            short_break: 300,
+            long_break: 900,
+            active: 3
         };
 
         /**
@@ -30,41 +32,44 @@
          * @param  {Function} cb
          */
         function _pomodoro (cb) {
+
             this._callback = cb;
             this._duration = times.active;
             this._count = 0;
             this._isBreak = false;
             this._timer = null;
-            this._complete = null;
         }
 
         _pomodoro.prototype.complete = function() {
 
+            var type;
+
             // increment the count only when active
-            if (!this.isBreak) {
+            if (!this._isBreak) {
                 this._count++;
             }
+
+            type = (this._isBreak) ? 'active' : 'break';
+
+            // brodacast type change
+            $rootScope.$broadcast('typeChange', {
+                type: type
+            });
 
             // toggle breaks
             this._isBreak = !this._isBreak;
 
+            this.cancelTimer();
             this.start();
         };
 
-        _pomodoro.prototype.start = function(cb) {
+        _pomodoro.prototype.start = function() {
 
             if (this._timer) {
                 return;
             }
 
             this._timer = true;
-
-            // set complete callback
-            if(!this._complete) {
-                this._complete = cb;
-            }
-
-            var timerType;
 
             if (this._isBreak && this._count % 4 === 0) {
 
@@ -113,6 +118,10 @@
                 self: this
             });
 
+        };
+
+        _pomodoro.prototype.getDuration = function() {
+            return times.active;
         };
 
         return _pomodoro;
