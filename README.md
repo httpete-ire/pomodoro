@@ -17,3 +17,4 @@ Web workers allow any script to run in a background thread and are not effected 
 - finish read me
 - audio when complete
 - ability to changes the settings
+- add HTML 5 notifications
