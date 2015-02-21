@@ -1,0 +1,8 @@
+body {
+    font-family: $font;
+}
+
+h1 {
+    @include font-size(72);
+    color: color(offwhite);
+}

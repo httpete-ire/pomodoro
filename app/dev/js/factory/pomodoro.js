@@ -19,10 +19,11 @@
 
         var timerType;
 
+        // private variables
         var times = {
             short_break: 300,
             long_break: 900,
-            active: 3
+            active: 1500
         };
 
         /**
@@ -32,14 +33,15 @@
          * @param  {Function} cb
          */
         function _pomodoro (cb) {
-
             this._callback = cb;
             this._duration = times.active;
             this._count = 0;
             this._isBreak = false;
             this._timer = null;
+            this._isPaused = false;
         }
 
+        // call this function when the timer has complete
         _pomodoro.prototype.complete = function() {
 
             var type;
@@ -63,6 +65,7 @@
             this.start();
         };
 
+        // start a new timer using the set times
         _pomodoro.prototype.start = function() {
 
             if (this._timer) {
@@ -92,25 +95,33 @@
             this.run();
         };
 
+        // pause the timer by clearing it
         _pomodoro.prototype.pause = function(first_argument) {
+            this._isPaused = true;
             this.cancelTimer();
         };
 
+        // clear the timer and remove the refernce to it
         _pomodoro.prototype.cancelTimer = function() {
             Timer.clearTimer();
             this._timer = false;
         };
 
+        // start the timer but dont pass a time
+        // the timer keeps the current time
         _pomodoro.prototype.resume = function() {
+            this._isPaused = false;
             Timer.startTimer({
                 callback: this._callback,
                 self: this
             });
         };
 
+        // start the timer and pass it an object with the time, a callback
+        // function and a refence to the pomodoro object
         _pomodoro.prototype.run = function() {
 
-            var _this = this;
+            this._isPaused = false;
 
             Timer.startTimer({
                 time: this._duration,
@@ -120,8 +131,13 @@
 
         };
 
+        // return how long the timer was set for
         _pomodoro.prototype.getDuration = function() {
             return times.active;
+        };
+
+        _pomodoro.prototype.isPaused = function() {
+            return this._isPaused;
         };
 
         return _pomodoro;

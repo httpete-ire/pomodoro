@@ -1,0 +1,12 @@
+%btn {
+    cursor: pointer;
+    padding: 7px 45px;
+    border: 2px solid color(offwhite);
+    border-radius: 7px;
+    @include font-size(18);
+}
+
+.pomodoro__btn {
+    @extend %btn;
+    color: color(offwhite);
+}

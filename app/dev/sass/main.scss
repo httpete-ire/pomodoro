@@ -1,5 +1,11 @@
+@import "utils/_functions.scss",
+        "utils/_mixins.scss";
 
+@import "base/_variables.scss",
+        "base/_reset.scss",
+        "base/_type.scss";
 
-html {
-    background: red;
-}
+@import "pages/_pomodoro.scss";
+
+@import "modules/_vertical-align.scss",
+        "modules/_btn.scss";

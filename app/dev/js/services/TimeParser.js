@@ -19,6 +19,8 @@
 
         var _TimeParser = {};
 
+        // format a number for the timer
+        // eg "10 : 25"
         _TimeParser.parse = function (value) {
 
             if(isNaN(value)) {

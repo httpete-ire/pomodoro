@@ -95,7 +95,7 @@ gulp.task('test', function() {
  *
  */
 gulp.task('dev', ['serve'], function () {
-  gulp.watch([paths.sass], ['sass']);
+  gulp.watch([paths.sass], ['sass:dev']);
   gulp.watch([paths.js], [browserSync.reload]);
 });
 

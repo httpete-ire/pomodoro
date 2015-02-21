@@ -1,10 +1,15 @@
-<div>
-  <h1>{{mainCtrl.time}}</h1>
+<div class="vertical__align">
+    <div class="pomodoro__container">
+        <h1>{{mainCtrl.time}}</h1>
 
 
-  <button ng-click="mainCtrl.start()" ng-show="mainCtrl.isPaused()">{{ (!vm.states.started) ? 'start' : 'resume'}}</button>
+        <div class="pomodoro__btns">
 
-  <button ng-click="mainCtrl.pause()" ng-hide="mainCtrl.isPaused()">pause</button>
+            <a class="pomodoro__btn" ng-click="mainCtrl.toggleTimer()" ng-show="mainCtrl.isPaused()">{{ mainCtrl.btnText }}</a>
 
+            <span class="pomodoro__hint">spacebar to toggle timer</span>
+
+      </div>
+
+    </div>
 </div>
-
