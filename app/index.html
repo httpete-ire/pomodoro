@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pomodoro">
+<head>
+    <meta charset="UTF-8">
+    <title>pomodoro</title>
+
+    <!-- bower:css -->
+    <!-- endbower -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="./dist/main.css">
+    <!-- endinject -->
+
+</head>
+<body>
+
+     
+    <div ng-include src="'./dev/templates/main.html'" ng-controller="MainCtrl as mainCtrl"></div>
+    
+
+
+    <!-- bower:js -->
+    <script src="dev/lib/angular/angular.js"></script>
+    <!-- endbower -->
+
+    <!-- inject:js -->
+    <script src="./dev/js/app.js"></script>
+    <script src="./dev/js/controllers/main.js"></script>
+    <!-- endinject -->
+
+</body>
+</html>
