@@ -1,4 +1,10 @@
 <div>
-  <h1>{{mainCtrl.title}}</h1>
+  <h1>{{mainCtrl.time}}</h1>
+
+
+  <button ng-click="mainCtrl.start()" ng-show="mainCtrl.isPaused()">{{ (!vm.states.started) ? 'start' : 'resume'}}</button>
+
+  <button ng-click="mainCtrl.pause()" ng-hide="mainCtrl.isPaused()">pause</button>
+
 </div>
 
