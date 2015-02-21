@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="pomodoro">
+<html lang="en" ng-app="pomodoro" ng-controller="MainCtrl as mainCtrl">
 <head>
     <meta charset="UTF-8">
-    <title>pomodoro</title>
+    <title>{{mainCtrl.title}}</title>
 
     <!-- bower:css -->
     <!-- endbower -->
@@ -14,10 +14,7 @@
 </head>
 <body>
 
-     
-    <div ng-include src="'./dev/templates/main.html'" ng-controller="MainCtrl as mainCtrl"></div>
-    
-
+    <div ng-include src="'./dev/templates/main.html'" ></div>
 
     <!-- bower:js -->
     <script src="dev/lib/angular/angular.js"></script>
