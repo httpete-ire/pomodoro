@@ -102,7 +102,7 @@ gulp.task('dev', ['serve'], function () {
 /**
  * inject bower into html, complile sass and inject
  */
-gulp.task('setup', ['bowerInject', 'sass:dev', 'dev']);
+gulp.task('setup', ['bowerInject', 'sass:dev', 'test', 'dev']);
 
 function sass (opts) {
     if(!opts) {
