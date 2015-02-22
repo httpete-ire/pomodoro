@@ -17,8 +17,6 @@ self.onmessage = function (e) {
 
 function startTimer (value) {
 
-    console.log(value);
-
     var SECOND = 1000;
 
     // if time is not passed we continue the countdown with the time

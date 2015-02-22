@@ -20,11 +20,10 @@
         // store the state of the UI in an obejct
         vm.states = {
             started: false,
+            paused: true,
             btn: 'paused',
             background: 'active'
         };
-
-        vm.btnText = 'Start';
 
         // create a new instance of the pomodoro object
         // and set the tick function to be executed every second
@@ -51,23 +50,40 @@
         vm.toggleTimer = function () {
 
             if (!vm.states.started) {
+                vm.states.started = true;
+                vm.states.paused = false;
 
                 // timer hasnt been started so we activate it
-                vm.states.started = true;
-                vm.btnText = 'pause';
                 vm.pomodoro.start();
+
             } else if (vm.pomodoro.isPaused()) {
-                vm.btnText = 'pause';
+                vm.states.paused = false;
+
                 // timer is paused so we resume it
                 vm.pomodoro.resume();
             } else {
-                vm.btnText = 'resume';
+                vm.states.paused = true;
+
                 // timer is active so we pause it
                 vm.pomodoro.pause();
-
             }
 
+            // set btn text
+            vm.btnText = vm.setBtn();
         }
+
+        // set text on btn depedning on the app state
+        vm.setBtn = function () {
+
+            // if timer is new
+            if (!vm.states.started) {
+                return 'start';
+            }
+
+            return (!vm.states.paused) ? 'pause' : 'resume';
+        };
+
+        vm.btnText = vm.setBtn();
 
         // listen for tpyeChange events and update the background
         // depending on the timer type

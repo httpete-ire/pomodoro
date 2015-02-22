@@ -38,7 +38,7 @@
             this._count = 0;
             this._isBreak = false;
             this._timer = null;
-            this._isPaused = false;
+            this._isPaused = true;
         }
 
         // call this function when the timer has complete
@@ -97,12 +97,12 @@
 
         // pause the timer by clearing it
         _pomodoro.prototype.pause = function(first_argument) {
-            this._isPaused = true;
             this.cancelTimer();
         };
 
         // clear the timer and remove the refernce to it
         _pomodoro.prototype.cancelTimer = function() {
+            this._isPaused = true;
             Timer.clearTimer();
             this._timer = false;
         };
@@ -133,11 +133,33 @@
 
         // return how long the timer was set for
         _pomodoro.prototype.getDuration = function() {
-            return times.active;
+            return this._duration;
         };
 
+        // return if the timer is active
         _pomodoro.prototype.isPaused = function() {
             return this._isPaused;
+        };
+
+        // update the settings of the timer
+        _pomodoro.prototype.updateSettings = function(settings) {
+
+            if(!angular.isObject(settings)){
+                return false;
+            }
+
+            // update the times
+            times = {
+                active: settings.active || times.active,
+                short_break: settings.short_break || times.short_break,
+                long_break: settings.long_break || times.long_break
+            }
+
+            // update the timer settings
+            this._duration = times.active;
+
+            // reset the settings
+            this.cancelTimer();
         };
 
         return _pomodoro;

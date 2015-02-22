@@ -17,7 +17,7 @@
      */
     function Timer () {
 
-        var _timer = this;
+        var _timer = {};
 
         // create a new web worker
         var worker = new Worker('./dev/js/utility/timer-worker.js');
@@ -35,7 +35,7 @@
 
                 if (e.data.started) {
                     started = e.data.started;
-                    return;
+                    return started;
                 }
 
                 switch (e.data.message) {
@@ -64,6 +64,10 @@
             worker.onmessage = function (e) {
                 started = !e.data.cleared;
             }
+        };
+
+        _timer.isActive = function () {
+            return started;
         };
 
         return _timer;
