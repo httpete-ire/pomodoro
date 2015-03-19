@@ -13,3 +13,21 @@
 
     </div>
 </div>
+
+<div class="pomodoro__settings" ng-class="{
+    'is-open' : mainCtrl.states.settings
+}">
+
+    <img src="/images/settings.svg" class="settings__trigger" ng-click="mainCtrl.toggleSettings()">
+
+    <div class="settings__panel" ng-click="mainCtrl.toggleSettings()">
+        <h3>Settings</h3>
+
+        <div class="settings__option">
+            desktop notifications
+        </div>
+
+
+    </div>
+</div>
+<!-- /.pomodoro__settings -->

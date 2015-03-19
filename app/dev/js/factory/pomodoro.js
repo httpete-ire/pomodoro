@@ -58,6 +58,8 @@
                 type: type
             });
 
+            // play audio
+
             // toggle breaks
             this._isBreak = !this._isBreak;
 

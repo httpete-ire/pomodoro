@@ -22,7 +22,8 @@
             started: false,
             paused: true,
             btn: 'paused',
-            background: 'active'
+            background: 'active',
+            settings: false
         };
 
         // create a new instance of the pomodoro object
@@ -82,6 +83,10 @@
 
             return (!vm.states.paused) ? 'pause' : 'resume';
         };
+
+        vm.toggleSettings = function () {
+            vm.states.settings = !vm.states.settings;
+        }
 
         vm.btnText = vm.setBtn();
 
