@@ -24,6 +24,14 @@
 
         var started = false;
 
+        /**
+         * start the timer and then handle the web workers response,
+         * 'tick' : invokes the callback function every second
+         * 'complete' : invokes the complete function when the timer is done
+         *
+         * @param  {Object} config
+         *
+         */
         _timer.startTimer = function (config) {
 
             worker.postMessage({
@@ -51,6 +59,10 @@
 
         };
 
+        /**
+         * send a message to the web worker to clear the timer
+         *
+         */
         _timer.clearTimer = function () {
             // only clear an active timer
             if (!started) {
@@ -66,6 +78,10 @@
             }
         };
 
+        /**
+         * return if the timer is active
+         *
+         */
         _timer.isActive = function () {
             return started;
         };

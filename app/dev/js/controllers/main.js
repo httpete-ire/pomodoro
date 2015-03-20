@@ -23,7 +23,8 @@
             paused: true,
             btn: 'paused',
             background: 'active',
-            settings: false
+            settings: false,
+            notification: null
         };
 
         // create a new instance of the pomodoro object
@@ -34,6 +35,9 @@
 
         // set the time to that of the pomodoro
         vm.time = TimeParser.parse(vm.pomodoro.getDuration());
+
+        //see if notifications are supported
+        vm.states.notification = vm.pomodoro.noticaftions();
 
         // return if the timer is active or not
         vm.isPaused = function () {
@@ -87,6 +91,14 @@
         vm.toggleSettings = function () {
             vm.states.settings = !vm.states.settings;
         }
+
+        vm.toggleNotification = function () {
+            // check too see if notification are supported
+            vm.pomodoro._notifier.grantPermission();
+
+            // toggle if the notifer
+            vm.pomodoro.toggleNotifaction();
+        };
 
         vm.btnText = vm.setBtn();
 

@@ -15,15 +15,15 @@
      *
      * @ngInject
      */
-    function Pomodoro (Timer, $rootScope) {
+    function Pomodoro (Timer, $rootScope, Notifier) {
 
         var timerType;
 
         // private variables
         var times = {
-            short_break: 300,
-            long_break: 900,
-            active: 1500
+            shortBreak: 30,
+            longBreak: 9,
+            active: 1
         };
 
         /**
@@ -39,6 +39,8 @@
             this._isBreak = false;
             this._timer = null;
             this._isPaused = true;
+            this._notifier = new Notifier();
+            this._notifactions = false;
         }
 
         // call this function when the timer has complete
@@ -49,6 +51,13 @@
             // increment the count only when active
             if (!this._isBreak) {
                 this._count++;
+            } else {
+            }
+
+
+            // if notifactions are on on set message
+            if (this._notifactions) {
+                this._notifier.setNotifaction('Enjoy a break');
             }
 
             type = (this._isBreak) ? 'active' : 'break';
@@ -78,19 +87,17 @@
 
             if (this._isBreak && this._count % 4 === 0) {
 
-                this._duration = times.long_break;
+                this._duration = times.longBreak;
                 timerType = 'break';
 
             } else if (this._isBreak && this._count % 4 !== 0) {
-                    // after every timer set a short break
-                this._duration = times.short_break;
-
+                // after every timer set a short break
+                this._duration = times.shortBreak;
                 timerType = 'break';
 
             } else {
-                    // else a normal timer (25 mins)
+                // else a normal timer (25 mins)
                 this._duration = times.active;
-
                 timerType = 'active';
             }
 
@@ -153,8 +160,8 @@
             // update the times
             times = {
                 active: settings.active || times.active,
-                short_break: settings.short_break || times.short_break,
-                long_break: settings.long_break || times.long_break
+                short_break: settings.short_break || times.shortBreak,
+                long_break: settings.long_break || times.longBreak
             }
 
             // update the timer settings
@@ -163,6 +170,22 @@
             // reset the settings
             this.cancelTimer();
         };
+
+        /**
+         * check if desktop notifactions are supported
+         *
+         */
+        _pomodoro.prototype.noticaftions = function () {
+            return this._notifier.isSupported();
+        };
+
+        /**
+         * toggle notifactions
+         *
+         */
+        _pomodoro.prototype.toggleNotifaction = function () {
+            this._notifactions = !this._notifactions;
+        }
 
         return _pomodoro;
     }
