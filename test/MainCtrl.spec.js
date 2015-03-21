@@ -25,10 +25,13 @@ describe('MainCtrl', function () {
     });
 
     it('the controller should have an instance of Pomodoro', function () {
+        ctrl.init();
         expect(ctrl.pomodoro).to.be.an.instanceOf(pomodoro);
     });
 
     it('the toggleTimer method should start the timer', function () {
+
+        ctrl.init();
 
         expect(ctrl.states.started).to.equal.false;
         ctrl.toggleTimer();
@@ -38,6 +41,8 @@ describe('MainCtrl', function () {
     });
 
     it('the toggleTimer should pause a active timer', function () {
+
+        ctrl.init();
 
         // start the timer
         ctrl.toggleTimer();
@@ -50,6 +55,8 @@ describe('MainCtrl', function () {
     });
 
     it('should update the btn text', function () {
+
+        ctrl.init();
 
         expect(ctrl.btnText).to.equal('start');
 
