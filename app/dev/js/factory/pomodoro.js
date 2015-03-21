@@ -47,7 +47,8 @@
             this._timer = null;
             this._isPaused = true;
             this._notifier = new Notifier();
-            this._notifactions = false;
+            this._desktopNotification = false;
+            this._audioNotification = false;
         }
 
         // call this function when the timer has complete
@@ -61,8 +62,13 @@
             }
 
             // if notifactions are on on set message
-            if (this._notifactions) {
-                this.setNotifaction();
+            if (this._desktopNotification) {
+                this.setDesktopNotification();
+            }
+
+            // play audio if set
+            if (this._audioNotification) {
+                this._notifier.playSound();
             }
 
             type = (this._isBreak) ? 'active' : 'break';
@@ -71,8 +77,6 @@
             $rootScope.$broadcast('typeChange', {
                 type: type
             });
-
-            // play audio
 
             // toggle breaks
             this._isBreak = !this._isBreak;
@@ -189,10 +193,10 @@
          *
          */
         _pomodoro.prototype.allowNotifaction = function (allowNotifcations) {
-            this._notifactions = allowNotifcations;
+            this._desktopNotification = allowNotifcations;
         };
 
-        _pomodoro.prototype.setNotifaction = function () {
+        _pomodoro.prototype.setDesktopNotification = function () {
 
             if(!this._isBreak) {
 

@@ -13,13 +13,15 @@
         var notifierSettings = {
             title: 'Pomodoro',
             tag: 'pomodoro',
-            dismiss: 3000
+            dismiss: 3000,
+            sound: './../../sounds/alarm.mp3'
         };
 
         function _notifier(opts) {
             this.settings = opts || {};
             this.permission = false;
             this._notifaction = null;
+            this._audio = new Audio(notifierSettings.sound);
         }
 
         /**
@@ -55,9 +57,11 @@
                 // call the close method and bind the value of this to
                 // be the notifier
                 $timeout(n.close.bind(n), notifierSettings.dismiss);
-
-                console.log('working');
             };
+        };
+
+        _notifier.prototype.playSound = function() {
+            this._audio.play();
         };
 
         _notifier.prototype.getPermission = function(){

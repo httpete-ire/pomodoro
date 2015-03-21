@@ -28,10 +28,9 @@
         };
 
         vm.models = {
-            notifications: (localStorage.notifications === 'true') || false
+            notifications: (localStorage.notifications === 'true') || false,
+            audioNotifications: (localStorage.audioNotifications) || false
         }
-
-        console.log(vm.models);
 
         vm.init = function () {
 
@@ -107,15 +106,24 @@
             vm.states.settings = !vm.states.settings;
         }
 
-        vm.toggleNotification = function () {
+        vm.allowDesktopNotifications = function () {
             // ask the user to allow desktop notifications
             vm.pomodoro._notifier.grantPermission();
 
+            // store the result in localStorage to persist the settings
             localStorage.setItem('notifications', vm.models.notifications);
 
             // toggle the notifer
             vm.pomodoro.allowNotifaction(vm.models.notifications);
         };
+
+        vm.toggleAudioNotifications = function () {
+
+            // store the result in localStorage to persist the settings
+            localStorage.setItem('audioNotifications', vm.models.audioNotifications);
+
+            vm.pomodoro._audioNotification = vm.models.audioNotifications;
+        }
 
         // listen for tpyeChange events and update the background
         // depending on the timer type
