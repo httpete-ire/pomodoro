@@ -21,9 +21,9 @@
 
         // private variables
         var times = {
-            shortBreak: 3,
-            longBreak: 9,
-            active: 1
+            shortBreak: 10,
+            longBreak: 15,
+            active: 30
         };
 
         // messages for the notifications
