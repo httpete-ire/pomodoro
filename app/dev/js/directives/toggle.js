@@ -15,8 +15,8 @@
             },
             template: [ '<div class="toggle">',
                             '<input type="checkbox" class="toggle__checkbox" ng-model="notification" ng-click="change()">',
-                            '<span class="toggle__switch"></span>',
-                            '<span class="toggle__track"></span>',
+                            '<b class="toggle__switch"></b>',
+                            '<b class="toggle__track"></b>',
                         '</div>'
                     ].join(''),
 
