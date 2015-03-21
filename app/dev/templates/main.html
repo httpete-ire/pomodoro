@@ -25,8 +25,7 @@
 
         <div class="settings__option">
 
-            <input type="checkbox" ng-if="mainCtrl.states.allowNotifactions" ng-model="mainCtrl.models.notifications" ng-change="mainCtrl.toggleNotification()">
-
+            <toggle notification="mainCtrl.models.notifications" change="mainCtrl.toggleNotification()"></toggle>
 
         </div>
 
