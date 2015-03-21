@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="pomodoro" ng-controller="MainCtrl as mainCtrl">
+<html lang="en" ng-app="pomodoro" ng-controller="MainCtrl as mainCtrl" ng-init="mainCtrl.init();">
 <head>
     <meta charset="UTF-8">
     <title>{{mainCtrl.time}}</title>
@@ -15,7 +15,7 @@
 </head>
 <body ng-class="[mainCtrl.states.background]">
 
-    <div ng-include src="'./dev/templates/main.html'" ></div>
+    <div ng-include src="'./dev/templates/main.html'"></div>
 
     <!-- bower:js -->
     <script src="dev/lib/angular/angular.js"></script>

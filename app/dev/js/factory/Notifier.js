@@ -60,6 +60,10 @@
             };
         };
 
+        _notifier.prototype.getPermission = function(){
+            return this.permission;
+        }
+
         return _notifier;
     };
 

@@ -21,10 +21,17 @@
 
         // private variables
         var times = {
-            shortBreak: 30,
+            shortBreak: 3,
             longBreak: 9,
             active: 1
         };
+
+        // messages for the notifications
+        var messages = {
+            shortBreak: 'enjoy a 3 min break',
+            longBreak: 'enjoy a 15 min break, you deserve it',
+            active: 'keep up the good work, only ' + times.active + ' mins till your next break'
+        }
 
         /**
          * object that contains the count, the type of timer
@@ -51,13 +58,11 @@
             // increment the count only when active
             if (!this._isBreak) {
                 this._count++;
-            } else {
             }
-
 
             // if notifactions are on on set message
             if (this._notifactions) {
-                this._notifier.setNotifaction('Enjoy a break');
+                this.setNotifaction();
             }
 
             type = (this._isBreak) ? 'active' : 'break';
@@ -183,9 +188,26 @@
          * toggle notifactions
          *
          */
-        _pomodoro.prototype.toggleNotifaction = function () {
-            this._notifactions = !this._notifactions;
-        }
+        _pomodoro.prototype.allowNotifaction = function (allowNotifcations) {
+            this._notifactions = allowNotifcations;
+        };
+
+        _pomodoro.prototype.setNotifaction = function () {
+
+            if(!this._isBreak) {
+
+                // check to see if its a long or short break
+                if(this._count % 4 === 0) {
+                    this._notifier.setNotifaction(messages.longBreak);
+                } else {
+                    this._notifier.setNotifaction(messages.shortBreak);
+                }
+
+            } else {
+                this._notifier.setNotifaction(messages.active);
+            }
+
+        };
 
         return _pomodoro;
     }

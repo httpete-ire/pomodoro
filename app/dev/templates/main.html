@@ -20,13 +20,14 @@
 
     <img src="/images/settings.svg" class="settings__trigger" ng-click="mainCtrl.toggleSettings()">
 
-    <div class="settings__panel" ng-click="mainCtrl.toggleSettings()">
+    <div class="settings__panel">
         <h3>Settings</h3>
 
         <div class="settings__option">
-            desktop notifications
 
-            <input type="checkbox" ng-click="mainCtrl.toggleNotification()">
+            <input type="checkbox" ng-if="mainCtrl.states.allowNotifactions" ng-model="mainCtrl.models.notifications" ng-change="mainCtrl.toggleNotification()">
+
+
         </div>
 
 

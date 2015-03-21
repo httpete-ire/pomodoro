@@ -24,20 +24,35 @@
             btn: 'paused',
             background: 'active',
             settings: false,
-            notification: null
+            allowNotifactions: false,
         };
 
-        // create a new instance of the pomodoro object
-        // and set the tick function to be executed every second
-        vm.pomodoro = new Pomodoro (function(time){
-            vm.setTime(time);
-        });
+        vm.models = {
+            notifications: (localStorage.notifications === 'true') || false
+        }
 
-        // set the time to that of the pomodoro
-        vm.time = TimeParser.parse(vm.pomodoro.getDuration());
+        console.log(vm.models);
 
-        //see if notifications are supported
-        vm.states.notification = vm.pomodoro.noticaftions();
+        vm.init = function () {
+
+            // create a new instance of the pomodoro object
+            // and set the tick function to be executed every second
+            vm.pomodoro = new Pomodoro (function(time){
+                vm.setTime(time);
+            });
+
+            // set the time to that of the pomodoro
+            vm.time = TimeParser.parse(vm.pomodoro.getDuration());
+
+            // see if allowNotifactionss are supported
+            vm.states.allowNotifactions = vm.pomodoro.noticaftions();
+
+            // set btn text
+            vm.btnText = vm.setBtn();
+
+            // set weither the timer should notify when complete
+            vm.pomodoro.allowNotifaction(vm.models.notifications);
+        }
 
         // return if the timer is active or not
         vm.isPaused = function () {
@@ -93,14 +108,14 @@
         }
 
         vm.toggleNotification = function () {
-            // check too see if notification are supported
+            // ask the user to allow desktop notifications
             vm.pomodoro._notifier.grantPermission();
 
-            // toggle if the notifer
-            vm.pomodoro.toggleNotifaction();
-        };
+            localStorage.setItem('notifications', vm.models.notifications);
 
-        vm.btnText = vm.setBtn();
+            // toggle the notifer
+            vm.pomodoro.allowNotifaction(vm.models.notifications);
+        };
 
         // listen for tpyeChange events and update the background
         // depending on the timer type
