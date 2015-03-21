@@ -6,11 +6,12 @@
         bottom: 20px;
         right: 20px;
         height: 120px;
-        width: 200px;
+        width: 250px;
         @include transform(scale(0));
         @include transition(transform, 0.2s, ease-in-out);
         transform-origin: 100% 100%;
         border-radius: 5px;
+        padding: 20px;
     }
 
     &__trigger {

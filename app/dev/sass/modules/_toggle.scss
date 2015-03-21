@@ -7,12 +7,13 @@
 
 .toggle {
 
-    width: 60px;
-    height: 40px;
+    width: 50px;
+    height: 30px;
     border-radius: 100px;
-    background-color: #ddd;
+    background-color: color(toggleGrey);
     overflow: hidden;
     position: relative;
+    float: right;
 
     &__checkbox {
         opacity: 0;
@@ -49,10 +50,20 @@
         bottom: 0;
         border-radius: 40px;
     }
+
+    &__container {
+        @extend %clearfix;
+    }
+
+    &__label {
+        float: left;
+        font-size: 14px;
+        line-height: 28px;
+        color: darken(color(toggleGrey), 25%);
+    }
 }
 
 .toggle__checkbox:checked {
-
 
     & ~ .toggle__track {
         box-shadow: inset 0 0 0 20px #4bd863;
