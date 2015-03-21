@@ -22,6 +22,10 @@
 
     <div class="settings__panel">
 
+        <div class="settings__close">
+            <span ng-click="mainCtrl.toggleSettings()">&times;</span>
+        </div>
+
         <div class="settings__option">
 
             <toggle notification="mainCtrl.models.notifications" change="mainCtrl.allowDesktopNotifications()" label="Desktop Notifications"></toggle>
