@@ -1,6 +1,8 @@
 # pomodoro
 a simple pomodoro timer app build using Angular and web workers
 
+[view app](http://httpete.com/pomodoro/)
+
 ### pomodoro
 
 ### how to build
