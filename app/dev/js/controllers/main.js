@@ -27,9 +27,10 @@
             allowNotifactions: false,
         };
 
+
         vm.models = {
             notifications: (localStorage.notifications === 'true') || false,
-            audioNotifications: (localStorage.audioNotifications) || false
+            audioNotifications: (localStorage.audioNotifications === 'true') || false
         }
 
         vm.init = function () {

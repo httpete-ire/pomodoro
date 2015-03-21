@@ -12,10 +12,11 @@
             scope: {
                 notification: '=',
                 change: '&',
-                label: '@'
+                label: '@',
+                klass: '@'
             },
             template: [
-            '<div class="toggle__container">',
+            '<div class="toggle__container {{klass}}">',
                 '<p class="toggle__label">{{label}}</p>',
                 '<div class="toggle">',
                     '<input type="checkbox" class="toggle__checkbox" ng-model="notification" ng-click="change()">',
@@ -24,7 +25,6 @@
                 '</div>',
             '</div>'
             ].join(''),
-
         };
     }
 

@@ -44,7 +44,7 @@
 
         _notifier.prototype.setNotifaction = function(msg) {
 
-            var self;
+            var self = this;
 
             // set notifaction
             var n = this._notifaction = new Notification(notifierSettings.title,{
@@ -58,12 +58,25 @@
                 // be the notifier
                 $timeout(n.close.bind(n), notifierSettings.dismiss);
             };
+
+            // stop the alarm when notification is clicked
+            this._notifaction.onclose = stopAudio;
+            this._notifaction.onclick = stopAudio;
+
+            // pause the alarm and reset it
+            function stopAudio () {
+                self._audio.pause();
+                self._audio.currentTime = 0;
+            }
+
         };
 
+        // play the alarm
         _notifier.prototype.playSound = function() {
             this._audio.play();
         };
 
+        // return if the user granted permission for the notifications
         _notifier.prototype.getPermission = function(){
             return this.permission;
         }
