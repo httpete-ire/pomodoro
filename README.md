@@ -21,7 +21,6 @@ Web workers allow any script to run in a background thread and are not effected 
 
 ### todo
 
-- audio when complete
-- ability to changes the settings
-- add HTML 5 notifications
-- finish read me
+- [x] audio when complete
+- [ ] ability to changes the settings
+- [x] add HTML 5 notifications
