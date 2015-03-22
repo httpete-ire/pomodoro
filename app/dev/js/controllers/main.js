@@ -17,7 +17,7 @@
 
         var vm = this;
 
-        // store the state of the UI in an obejct
+        // store the state of the UI in an object
         vm.states = {
             started: false,
             paused: true,
@@ -48,7 +48,7 @@
             vm.states.allowNotifactions = vm.pomodoro.noticaftions();
 
             // set btn text
-            vm.btnText = vm.setBtn();
+            vm.timerState = vm.setBtn();
 
             // set weither the timer should notify when complete
             vm.pomodoro.allowNotifaction(vm.models.notifications);
@@ -73,11 +73,16 @@
                 vm.states.started = true;
                 vm.states.paused = false;
 
+                vm.closeSettings();
+
                 // timer hasnt been started so we activate it
                 vm.pomodoro.start();
 
             } else if (vm.pomodoro.isPaused()) {
+
                 vm.states.paused = false;
+
+                vm.closeSettings();
 
                 // timer is paused so we resume it
                 vm.pomodoro.resume();
@@ -89,7 +94,7 @@
             }
 
             // set btn text
-            vm.btnText = vm.setBtn();
+            vm.timerState = vm.setBtn();
         }
 
         // set text on btn depedning on the app state
@@ -105,6 +110,10 @@
 
         vm.toggleSettings = function () {
             vm.states.settings = !vm.states.settings;
+        }
+
+        vm.closeSettings = function() {
+            vm.states.settings = false;
         }
 
         vm.allowDesktopNotifications = function () {

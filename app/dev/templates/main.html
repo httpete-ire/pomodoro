@@ -5,9 +5,9 @@
 
         <div class="pomodoro__btns">
 
-            <a class="pomodoro__btn" ng-click="mainCtrl.toggleTimer()" ng-show="mainCtrl.isPaused()">{{ mainCtrl.btnText }}</a>
+            <a class="pomodoro__btn" ng-click="mainCtrl.toggleTimer()" ng-show="mainCtrl.isPaused()">{{ mainCtrl.timerState }}</a>
 
-            <span class="pomodoro__hint">spacebar to toggle timer</span>
+            <span class="pomodoro__hint">spacebar to {{ mainCtrl.timerState }} timer</span>
 
       </div>
 
