@@ -45,6 +45,7 @@
      *
      * @param  {Number} value
      * @return {String} prefixed value
+     *
      */
     function prefixTime (value) {
         return (value < 10) ? '0' + value : value;

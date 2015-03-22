@@ -28,8 +28,8 @@
 
         // messages for the notifications
         var messages = {
-            shortBreak: 'enjoy a 3 min break',
-            longBreak: 'enjoy a 15 min break, you deserve it',
+            shortBreak: 'enjoy a ' + times.shortBreak+ ' min break',
+            longBreak: 'enjoy a ' + times.longBreak + ' min break, you deserve it',
             active: 'keep up the good work, only ' + times.active + ' mins till your next break'
         }
 

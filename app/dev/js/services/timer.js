@@ -79,7 +79,7 @@
         };
 
         /**
-         * return if the timer is active
+         * return if the timer has started
          *
          */
         _timer.isActive = function () {

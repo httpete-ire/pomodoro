@@ -2,7 +2,7 @@
 <html lang="en" ng-app="pomodoro" ng-controller="MainCtrl as mainCtrl" ng-init="mainCtrl.init();">
 <head>
     <meta charset="UTF-8">
-    <title>{{mainCtrl.time}}</title>
+    <title ng-bind="mainCtrl.time"></title>
 
     <!-- bower:css -->
     <!-- endbower -->
