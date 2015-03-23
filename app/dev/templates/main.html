@@ -1,14 +1,12 @@
 <div class="vertical__align">
-    <div class="pomodoro__container">
+    <div class="pomodoro__container" spacebar-listener listener="mainCtrl.toggleTimer()">
         <h1>{{mainCtrl.time}}</h1>
-
 
         <div class="pomodoro__btns">
 
             <a class="pomodoro__btn" ng-click="mainCtrl.toggleTimer()" ng-show="mainCtrl.isPaused()">{{ mainCtrl.timerState }}</a>
 
             <span class="pomodoro__hint">spacebar to {{ mainCtrl.timerState }} timer</span>
-
       </div>
 
     </div>

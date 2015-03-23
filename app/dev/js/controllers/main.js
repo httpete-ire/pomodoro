@@ -135,25 +135,10 @@
             vm.pomodoro._audioNotification = vm.models.audioNotifications;
         }
 
-        // listen for tpyeChange events and update the background
+        // listen for typeChange events and update the background
         // depending on the timer type
         $scope.$on('typeChange', function(e, data){
             vm.states.background = data.type;
-        });
-
-        //
-        // bind keyboard events
-        //
-        $document.bind('keydown', function(e) {
-
-            var SPACE = 32;
-
-            if (e.keyCode === SPACE) {
-                vm.toggleTimer();
-
-                // call the digest to the btn text updates
-                $scope.$apply();
-            }
         });
 
     }
