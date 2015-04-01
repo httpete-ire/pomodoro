@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     'use strict';
 
@@ -15,20 +15,20 @@
      *
      * @ngInject
      */
-    function TimeParser () {
+    function TimeParser() {
 
         var _TimeParser = {};
 
         // format a number for the timer
         // eg "10 : 25"
-        _TimeParser.parse = function (value) {
+        _TimeParser.parse = function(value) {
 
-            if(isNaN(value)) {
+            if (isNaN(value)) {
                 return '';
             }
 
-            var mins,
-                secs;
+            var mins;
+            var secs;
 
             mins = prefixTime(Math.floor(value / 60));
 
@@ -47,7 +47,7 @@
      * @return {String} prefixed value
      *
      */
-    function prefixTime (value) {
+    function prefixTime(value) {
         return (value < 10) ? '0' + value : value;
     }
 

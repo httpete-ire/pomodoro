@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     'use strict';
 
@@ -10,12 +10,7 @@
      * @description
      * Main module of the application.
      */
-
-    
     angular
     .module('pomodoro', []);
-    
-
-    
 
 })();

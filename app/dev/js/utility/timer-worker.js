@@ -1,9 +1,12 @@
+/* global self */
+/* global postMessage */
+'use strict';
+
 // store the timer so we can clear it
 var timer = null;
-
 var time = null;
 
-self.onmessage = function (e) {
+self.onmessage = function(e) {
     switch (e.data.command) {
         case 'start':
             startTimer(e.data.time);
@@ -14,16 +17,14 @@ self.onmessage = function (e) {
     }
 };
 
-
-function startTimer (value) {
+function startTimer(value) {
 
     var SECOND = 1000;
 
     // if time is not passed we continue the countdown with the time
     time = value || time;
 
-
-    timer = setInterval(function(){
+    timer = setInterval(function() {
 
         postMessage({
             message: 'tick',
@@ -45,16 +46,15 @@ function startTimer (value) {
 
     }, SECOND);
 
-
     // return that the timer has started
     postMessage({
         started: !!timer
     });
 }
 
-function clearTimer () {
+function clearTimer() {
 
-    if(!timer) {
+    if (!timer) {
         return;
     }
 

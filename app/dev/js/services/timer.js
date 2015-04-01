@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     'use strict';
 
@@ -15,7 +15,7 @@
      *
      * @ngInject
      */
-    function Timer () {
+    function Timer() {
 
         var _timer = {};
 
@@ -32,14 +32,14 @@
          * @param  {Object} config
          *
          */
-        _timer.startTimer = function (config) {
+        _timer.startTimer = function(config) {
 
             worker.postMessage({
                 command: 'start',
                 time: config.time
             });
 
-            worker.onmessage = function (e) {
+            worker.onmessage = function(e) {
 
                 if (e.data.started) {
                     started = e.data.started;
@@ -63,7 +63,7 @@
          * send a message to the web worker to clear the timer
          *
          */
-        _timer.clearTimer = function () {
+        _timer.clearTimer = function() {
             // only clear an active timer
             if (!started) {
                 return;
@@ -73,16 +73,16 @@
                 command: 'clear'
             });
 
-            worker.onmessage = function (e) {
+            worker.onmessage = function(e) {
                 started = !e.data.cleared;
-            }
+            };
         };
 
         /**
          * return if the timer has started
          *
          */
-        _timer.isActive = function () {
+        _timer.isActive = function() {
             return started;
         };
 

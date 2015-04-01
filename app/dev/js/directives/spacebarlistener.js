@@ -1,33 +1,39 @@
-(function () {
+(function() {
     'use strict';
 
     angular
     .module('pomodoro')
-    .directive('spacebarListener',spacebarListener);
+    .directive('spacebarListener', spacebarListener);
 
-    var SPACE = 32;
+    /**
+     * @ngdoc directive
+     * @name pomodoro.directive:spacebarListener
+     * @description bind a listener to a spacebar keydown
+     * @restrict A
+     * @scope
+     *
+     * @ngInject
+     */
+    function spacebarListener($document) {
 
-    function spacebarListener ($document) {
+        var SPACE_KEY = 32;
+
         return {
             restrict: 'A',
             scope: {
                 listener: '&'
             },
-            link: function (scope, elem, attr) {
-
-                $document.bind('keydown', function(e) {
-
-                    if (e.keyCode === SPACE) {
-
-                        scope.listener();
-
-                        scope.$apply();
-                    }
-
-                });
-
-            }
+            link: link
         };
+
+        function link(scope) {
+            $document.bind('keydown', function(e) {
+                if (e.keyCode === SPACE_KEY) {
+                    scope.listener();
+                    scope.$apply();
+                }
+            });
+        }
     }
 
 })();

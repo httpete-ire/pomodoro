@@ -1,12 +1,18 @@
-(function () {
+(function() {
     'use strict';
 
     angular
     .module('pomodoro')
     .directive('toggle', toggle);
 
-
-    function toggle () {
+    /**
+     * @ngdoc directive
+     * @name pomodoro.directive:toggle
+     * @description iOS like toggle for settings
+     * @restrict E
+     * @scope
+     */
+    function toggle() {
         return {
             restrict: 'E',
             scope: {
@@ -24,7 +30,7 @@
                     '<b class="toggle__track"></b>',
                 '</div>',
             '</div>'
-            ].join(''),
+            ].join('')
         };
     }
 

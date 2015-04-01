@@ -1,4 +1,4 @@
-(function () {
+(function() {
 
     'use strict';
 
@@ -12,8 +12,10 @@
      *
      * @description
      * Controller of the pomodoro
+     *
+     * @ngInject
      */
-    function MainCtrl (Pomodoro, $scope, TimeParser, $document) {
+    function MainCtrl(Pomodoro, $scope, TimeParser) {
 
         var vm = this;
 
@@ -24,20 +26,19 @@
             btn: 'paused',
             background: 'active',
             settings: false,
-            allowNotifactions: false,
+            allowNotifactions: false
         };
-
 
         vm.models = {
             notifications: (localStorage.notifications === 'true') || false,
             audioNotifications: (localStorage.audioNotifications === 'true') || false
-        }
+        };
 
-        vm.init = function () {
+        vm.init = function() {
 
             // create a new instance of the pomodoro object
             // and set the tick function to be executed every second
-            vm.pomodoro = new Pomodoro (function(time){
+            vm.pomodoro = new Pomodoro (function(time) {
                 vm.setTime(time);
             });
 
@@ -52,22 +53,22 @@
 
             // set weither the timer should notify when complete
             vm.pomodoro.allowNotifaction(vm.models.notifications);
-        }
+        };
 
         // return if the timer is active or not
-        vm.isPaused = function () {
+        vm.isPaused = function() {
             return vm.states.btn === 'paused';
-        }
+        };
 
         // set the time on the view
         // parse the time so it is formatted correctly
-        vm.setTime = function (value) {
+        vm.setTime = function(value) {
             vm.time = TimeParser.parse(value);
             $scope.$apply();
-        }
+        };
 
         // toggle the timer from start to pause
-        vm.toggleTimer = function () {
+        vm.toggleTimer = function() {
 
             if (!vm.states.started) {
                 vm.states.started = true;
@@ -95,10 +96,10 @@
 
             // set btn text
             vm.timerState = vm.setBtn();
-        }
+        };
 
         // set text on btn depedning on the app state
-        vm.setBtn = function () {
+        vm.setBtn = function() {
 
             // if timer is new
             if (!vm.states.started) {
@@ -108,15 +109,15 @@
             return (!vm.states.paused) ? 'pause' : 'resume';
         };
 
-        vm.toggleSettings = function () {
+        vm.toggleSettings = function() {
             vm.states.settings = !vm.states.settings;
-        }
+        };
 
         vm.closeSettings = function() {
             vm.states.settings = false;
-        }
+        };
 
-        vm.allowDesktopNotifications = function () {
+        vm.allowDesktopNotifications = function() {
             // ask the user to allow desktop notifications
             vm.pomodoro._notifier.grantPermission();
 
@@ -127,22 +128,22 @@
             vm.pomodoro.allowNotifaction(vm.models.notifications);
         };
 
-        vm.toggleAudioNotifications = function () {
+        vm.toggleAudioNotifications = function() {
 
             // store the result in localStorage to persist the settings
             localStorage.setItem('audioNotifications', vm.models.audioNotifications);
 
             vm.pomodoro._audioNotification = vm.models.audioNotifications;
-        }
+        };
 
         // listen for typeChange events and update the background
         // depending on the timer type
-        $scope.$on('typeChange', function(e, data){
+        $scope.$on('typeChange', function(e, data) {
             vm.states.background = data.type;
         });
 
     }
 
-    MainCtrl.$inject = ['Pomodoro', '$scope', 'TimeParser', '$document'];
+    MainCtrl.$inject = ['Pomodoro', '$scope', 'TimeParser'];
 
 })();
