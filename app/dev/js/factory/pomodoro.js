@@ -36,6 +36,7 @@
             this._notifier = new Notifier();
             this._desktopNotification = false;
             this._audioNotification = false;
+            this._state = 'active';
         }
 
         // call this function when the timer has complete
@@ -82,28 +83,23 @@
             this._timer = true;
 
             if (this._isBreak && this._count % 4 === 0) {
-
-                this._duration = TimerSettings.getTime('longBreak');
-
                 timerType = 'break';
-
+                this._state = 'longBreak';
             } else if (this._isBreak && this._count % 4 !== 0) {
                 // after every timer set a short break
-                this._duration = TimerSettings.getTime('shortBreak');
                 timerType = 'break';
-
+                this._state = 'shortBreak';
             } else {
-                // else a normal timer (25 mins)
-                this._duration = TimerSettings.getTime('active');
                 timerType = 'active';
+                this._state = 'active';
             }
 
             this.run();
         };
 
-        _pomodoro.prototype.setTime = function(type, value) {
+        _pomodoro.prototype.reset = function() {
             this.cancelTimer();
-            TimerSettings.setTime(type, value);
+            this.run();
         };
 
         // pause the timer by clearing it
@@ -132,6 +128,8 @@
         // function and a refence to the pomodoro object
         _pomodoro.prototype.run = function() {
 
+            this._duration = TimerSettings.getTime(this._state);
+
             this._isPaused = false;
 
             Timer.startTimer({
@@ -144,7 +142,7 @@
 
         // return how long the timer was set for
         _pomodoro.prototype.getDuration = function() {
-            return this._duration;
+            return TimerSettings.getTime(this._state);
         };
 
         // return if the timer is active

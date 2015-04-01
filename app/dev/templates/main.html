@@ -30,6 +30,10 @@
 
             <toggle notification="mainCtrl.models.audioNotifications" change="mainCtrl.toggleAudioNotifications()" label="Audio Notifications" klass="toggle__container--last"></toggle>
 
+            <input type="text" ng-model="mainCtrl.models.activeTime" ng-blur="mainCtrl.updateTime('active', mainCtrl.models.activeTime)">
+            <input type="text" ng-model="mainCtrl.models.shortBreak" ng-blur="mainCtrl.updateTime('shortBreak', mainCtrl.models.shortBreak)">
+            <input type="text" ng-model="mainCtrl.models.longBreak" ng-blur="mainCtrl.updateTime('longBreak', mainCtrl.models.longBreak)">
+
         </div>
 
     </div>

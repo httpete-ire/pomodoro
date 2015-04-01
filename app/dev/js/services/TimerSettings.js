@@ -21,14 +21,8 @@
             active: 3
         };
 
-        var messages = {
-            shortBreak: 'enjoy a ' + times.shortBreak + ' min break',
-            longBreak: 'enjoy a ' + times.longBreak + ' min break, you deserve it',
-            active: 'keep up the good work, only ' + times.active + ' mins till your next break'
-        };
-
         service.setTime = function(type, value) {
-            times[type] = value;
+            times[type] = Number(value * 60);
         };
 
         service.getTime = function(type) {
@@ -36,7 +30,13 @@
         };
 
         service.getMsg = function(type) {
-            return messages[type] || 'Beam me up Scotty!!!';
+            var time = times[type];
+
+            if (type !== 'active') {
+                return 'enjoy a ' + time + ' min break';
+            } else {
+                return 'keep up the good work, only ' + time + ' mins till your next break'
+            }
         };
 
         service.setNotification = function(type, value) {

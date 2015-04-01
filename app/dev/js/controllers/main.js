@@ -31,7 +31,10 @@
 
         vm.models = {
             desktopNotification: TimerSettings.getNotification('desktop'),
-            audioNotifications: TimerSettings.getNotification('audio')
+            audioNotifications: TimerSettings.getNotification('audio'),
+            activeTime: TimerSettings.getTime('active'),
+            shortBreak: TimerSettings.getTime('shortBreak'),
+            longBreak: TimerSettings.getTime('longBreak')
         };
 
         vm.init = function() {
@@ -133,6 +136,19 @@
             TimerSettings.setNotification('audio', vm.models.audioNotifications);
 
             vm.pomodoro._audioNotification = vm.models.audioNotifications;
+        };
+
+        vm.reset = function() {
+            vm.pomodoro.reset();
+            // set the time to that of the pomodoro
+            vm.time = TimeParser.parse(vm.pomodoro.getDuration());
+
+        };
+
+
+        vm.updateTime = function(type, newTime) {
+            // check if new time is a valid number
+            TimerSettings.setTime(type, newTime);
         };
 
         // listen for typeChange events and update the background
