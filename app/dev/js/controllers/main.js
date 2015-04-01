@@ -29,8 +29,6 @@
             allowNotifactions: false
         };
 
-        console.log(TimerSettings);
-
         vm.models = {
             desktopNotification: TimerSettings.getNotification('desktop'),
             audioNotifications: TimerSettings.getNotification('audio')
@@ -54,7 +52,7 @@
             vm.timerState = vm.setBtn();
 
             // set weither the timer should notify when complete
-            vm.pomodoro.allowNotifaction(vm.models.notifications);
+            vm.pomodoro.allowNotifaction(vm.models.desktopNotification);
         };
 
         // return if the timer is active or not
@@ -127,7 +125,7 @@
             TimerSettings.setNotification('desktop', vm.models.desktopNotification);
 
             // toggle the notifer
-            vm.pomodoro.allowNotifaction(vm.models.notifications);
+            vm.pomodoro.allowNotifaction(vm.models.desktopNotification);
         };
 
         vm.toggleAudioNotifications = function() {

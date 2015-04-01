@@ -15,23 +15,9 @@
      *
      * @ngInject
      */
-    function Pomodoro(Timer, $rootScope, Notifier) {
+    function Pomodoro(Timer, $rootScope, Notifier, TimerSettings) {
 
         var timerType;
-
-        // private variables
-        var times = {
-            shortBreak: 10,
-            longBreak: 15,
-            active: 30
-        };
-
-        // messages for the notifications
-        var messages = {
-            shortBreak: 'enjoy a ' + times.shortBreak + ' min break',
-            longBreak: 'enjoy a ' + times.longBreak + ' min break, you deserve it',
-            active: 'keep up the good work, only ' + times.active + ' mins till your next break'
-        };
 
         /**
          * object that contains the count, the type of timer
@@ -42,7 +28,7 @@
         function _pomodoro(cb) {
             /*jshint validthis:true */
             this._callback = cb;
-            this._duration = times.active;
+            this._duration = TimerSettings.getTime('active');
             this._count = 0;
             this._isBreak = false;
             this._timer = null;
@@ -97,21 +83,27 @@
 
             if (this._isBreak && this._count % 4 === 0) {
 
-                this._duration = times.longBreak;
+                this._duration = TimerSettings.getTime('longBreak');
+
                 timerType = 'break';
 
             } else if (this._isBreak && this._count % 4 !== 0) {
                 // after every timer set a short break
-                this._duration = times.shortBreak;
+                this._duration = TimerSettings.getTime('shortBreak');
                 timerType = 'break';
 
             } else {
                 // else a normal timer (25 mins)
-                this._duration = times.active;
+                this._duration = TimerSettings.getTime('active');
                 timerType = 'active';
             }
 
             this.run();
+        };
+
+        _pomodoro.prototype.setTime = function(type, value) {
+            this.cancelTimer();
+            TimerSettings.setTime(type, value);
         };
 
         // pause the timer by clearing it
@@ -160,27 +152,6 @@
             return this._isPaused;
         };
 
-        // update the settings of the timer
-        _pomodoro.prototype.updateSettings = function(settings) {
-
-            if (!angular.isObject(settings)) {
-                return false;
-            }
-
-            // update the times
-            times = {
-                active: settings.active || times.active,
-                short_break: settings.short_break || times.shortBreak,
-                long_break: settings.long_break || times.longBreak
-            };
-
-            // update the timer settings
-            this._duration = times.active;
-
-            // reset the settings
-            this.cancelTimer();
-        };
-
         /**
          * check if desktop notifactions are supported
          *
@@ -203,13 +174,13 @@
 
                 // check to see if its a long or short break
                 if (this._count % 4 === 0) {
-                    this._notifier.setNotifaction(messages.longBreak);
+                    this._notifier.setNotifaction(TimerSettings.getMsg('longBreak'));
                 } else {
-                    this._notifier.setNotifaction(messages.shortBreak);
+                    this._notifier.setNotifaction(TimerSettings.getMsg('shortBreak'));
                 }
 
             } else {
-                this._notifier.setNotifaction(messages.active);
+                this._notifier.setNotifaction(TimerSettings.getMsg('active'));
             }
 
         };
