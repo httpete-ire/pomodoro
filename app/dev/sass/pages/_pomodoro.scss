@@ -26,6 +26,14 @@
         @include font-size(12);
     }
 
+    &__count {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        color: rgba(240, 243, 246, 0.6);
+        @include font-size(14);
+    }
+
 }
 
 body {
