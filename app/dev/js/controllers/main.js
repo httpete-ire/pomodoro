@@ -15,7 +15,7 @@
      *
      * @ngInject
      */
-    function MainCtrl(Pomodoro, $scope, TimeParser) {
+    function MainCtrl(Pomodoro, $scope, TimeParser, TimerSettings) {
 
         var vm = this;
 
@@ -29,9 +29,11 @@
             allowNotifactions: false
         };
 
+        console.log(TimerSettings);
+
         vm.models = {
-            notifications: (localStorage.notifications === 'true') || false,
-            audioNotifications: (localStorage.audioNotifications === 'true') || false
+            desktopNotification: TimerSettings.getNotification('desktop'),
+            audioNotifications: TimerSettings.getNotification('audio')
         };
 
         vm.init = function() {
@@ -122,7 +124,7 @@
             vm.pomodoro._notifier.grantPermission();
 
             // store the result in localStorage to persist the settings
-            localStorage.setItem('notifications', vm.models.notifications);
+            TimerSettings.setNotification('desktop', vm.models.desktopNotification);
 
             // toggle the notifer
             vm.pomodoro.allowNotifaction(vm.models.notifications);
@@ -130,8 +132,7 @@
 
         vm.toggleAudioNotifications = function() {
 
-            // store the result in localStorage to persist the settings
-            localStorage.setItem('audioNotifications', vm.models.audioNotifications);
+            TimerSettings.setNotification('audio', vm.models.audioNotifications);
 
             vm.pomodoro._audioNotification = vm.models.audioNotifications;
         };
@@ -144,6 +145,6 @@
 
     }
 
-    MainCtrl.$inject = ['Pomodoro', '$scope', 'TimeParser'];
+    MainCtrl.$inject = ['Pomodoro', '$scope', 'TimeParser', 'TimerSettings'];
 
 })();
