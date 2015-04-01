@@ -34,14 +34,15 @@
             audioNotifications: TimerSettings.getNotification('audio'),
             activeTime: TimerSettings.getTime('active'),
             shortBreak: TimerSettings.getTime('shortBreak'),
-            longBreak: TimerSettings.getTime('longBreak')
+            longBreak: TimerSettings.getTime('longBreak'),
+            count: 0
         };
 
         vm.init = function() {
 
             // create a new instance of the pomodoro object
             // and set the tick function to be executed every second
-            vm.pomodoro = new Pomodoro (function(time) {
+            vm.pomodoro = new Pomodoro(function(time) {
                 vm.setTime(time);
             });
 
@@ -145,7 +146,6 @@
 
         };
 
-
         vm.updateTime = function(type, newTime) {
             // check if new time is a valid number
             TimerSettings.setTime(type, newTime);
@@ -155,6 +155,7 @@
         // depending on the timer type
         $scope.$on('typeChange', function(e, data) {
             vm.states.background = data.type;
+            vm.models.count = vm.pomodoro._count;
         });
 
     }

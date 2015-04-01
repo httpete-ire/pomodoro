@@ -12,8 +12,7 @@
      *
      * @ngInject
      */
-    function TimerSettings($window) {
-        var service = {};
+    function TimerSettings($window, Storage) {
 
         var times = {
             shortBreak: 10,
@@ -21,15 +20,23 @@
             active: 3
         };
 
-        service.setTime = function(type, value) {
-            times[type] = Number(value * 60);
+        return {
+            setTime: setTime,
+            getTime: getTime,
+            getMsg: getMsg,
+            setNotification: setNotification,
+            getNotification: getNotification
         };
 
-        service.getTime = function(type) {
+        function setTime(type, value) {
+            times[type] = Number(value * 60);
+        }
+
+        function getTime(type) {
             return times[type] || 0;
         };
 
-        service.getMsg = function(type) {
+        function getMsg(type) {
             var time = times[type];
 
             if (type !== 'active') {
@@ -39,15 +46,13 @@
             }
         };
 
-        service.setNotification = function(type, value) {
-            $window.localStorage.setItem(type, value);
+        function setNotification(type, value) {
+            Storage.set(type, value);
         };
 
-        service.getNotification = function(type) {
-            return ($window.localStorage.getItem(type) === 'true') || false;
+        function getNotification(type) {
+            return (Storage.get(type) === 'true') || false;
         };
-
-        return service;
     }
 
 })();

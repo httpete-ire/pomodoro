@@ -12,6 +12,11 @@
     </div>
 </div>
 
+<div class="pomodoro__count">
+    <p>{{mainCtrl.models.count}} <ng-pluralize count="mainCtrl.models.count"when="{'0': 'pomodoros', 'one': 'pomodoro', 'other': 'pomodoros'}">
+  </ng-pluralize> complete</p>
+</div>
+
 <div class="pomodoro__settings" ng-class="{
     'is-open' : mainCtrl.states.settings
 }">
