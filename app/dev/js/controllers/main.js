@@ -141,6 +141,7 @@
 
         vm.reset = function() {
             vm.pomodoro.reset();
+
             // set the time to that of the pomodoro
             vm.time = TimeParser.parse(vm.pomodoro.getDuration());
 
