@@ -56,7 +56,7 @@
             vm.timerState = vm.setBtn();
 
             // set weither the timer should notify when complete
-            vm.pomodoro.allowNotifaction(vm.models.desktopNotification);
+            vm.pomodoro.allowNotifaction(vm.models.desktopNotification, vm.models.audioNotifications);
         };
 
         // return if the timer is active or not

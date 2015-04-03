@@ -162,8 +162,9 @@
          * toggle notifactions
          *
          */
-        _pomodoro.prototype.allowNotifaction = function(allowNotifcations) {
-            this._desktopNotification = allowNotifcations;
+        _pomodoro.prototype.allowNotifaction = function(desktop, audio) {
+            this._desktopNotification = desktop;
+            this._audioNotification = audio;
         };
 
         _pomodoro.prototype.setDesktopNotification = function() {
