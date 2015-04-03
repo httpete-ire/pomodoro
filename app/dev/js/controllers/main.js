@@ -32,9 +32,9 @@
         vm.models = {
             desktopNotification: TimerSettings.getNotification('desktop'),
             audioNotifications: TimerSettings.getNotification('audio'),
-            activeTime: TimerSettings.getTime('active'),
-            shortBreak: TimerSettings.getTime('shortBreak'),
-            longBreak: TimerSettings.getTime('longBreak'),
+            activeTime: TimerSettings.getTime('active') / 60,
+            shortBreak: TimerSettings.getTime('shortBreak') / 60,
+            longBreak: TimerSettings.getTime('longBreak') / 60,
             count: 0
         };
 
@@ -150,8 +150,10 @@
         vm.updateTime = function(type, newTime) {
             TimerSettings.setTime(type, newTime);
 
+
             // if time is paused update the time, otherwise wait till next timer
             if (!vm.states.started) {
+                console.log(vm.pomodoro.getDuration());
                 vm.time = TimeParser.parse(vm.pomodoro.getDuration());
                 // call the digest cycle to update the timer
                 $scope.$apply();

@@ -15,9 +15,9 @@
     function TimerSettings($window, Storage) {
 
         var times = {
-            shortBreak: 10,
+            shortBreak: 3,
             longBreak: 15,
-            active: 3
+            active: 25
         };
 
         return {
@@ -29,11 +29,12 @@
         };
 
         function setTime(type, value) {
-            times[type] = Number(value * 60);
+            times[type] = Number(value);
         }
 
+        // return the timer in mintues
         function getTime(type) {
-            return times[type] || 0;
+            return times[type] * 60 || 0;
         }
 
         function getMsg(type) {

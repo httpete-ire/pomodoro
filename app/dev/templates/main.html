@@ -35,22 +35,12 @@
 
             <toggle notification="mainCtrl.models.audioNotifications" change="mainCtrl.toggleAudioNotifications()" label="Audio Notifications" klass="toggle__container--last"></toggle>
 
-            <pomodoro-range min="10" max="40" step="5" time="mainCtrl.models.activeTime" label="Active time" update="mainCtrl.updateTime(timer, time)" timer="active"></pomodoro-range>
+            <pomodoro-range min="10" max="40" step="5" time="mainCtrl.models.activeTime" label="Active" update="mainCtrl.updateTime(timer, time)" timer="active"></pomodoro-range>
 
             <pomodoro-range min="1" max="5" step="1" time="mainCtrl.models.shortBreak" label="Short break" update="mainCtrl.updateTime(timer, time)" timer="shortBreak"></pomodoro-range>
 
             <pomodoro-range min="5" max="20" step="5" time="mainCtrl.models.longBreak" label="Long break" update="mainCtrl.updateTime(timer, time)" timer="longBreak"></pomodoro-range>
 
-
-            <!-- <input type="range" pomodoro-range min="10" max="40" step="5" ng-model="mainCtrl.models.activeTime" ng-blur="mainCtrl.updateTime('active', mainCtrl.models.activeTime)">
-
-            <input type="range" pomodoro-range min="1" max="5" step="1" ng-model="mainCtrl.models.shortBreak" ng-blur="mainCtrl.updateTime('shortBreak', mainCtrl.models.shortBreak)">
-
-            <input type="range" pomodoro-range min="5" max="25" step="5" ng-model="mainCtrl.models.longBreak" ng-blur="mainCtrl.updateTime('longBreak', mainCtrl.models.longBreak)"> -->
-<!--
-            <input type="text" ng-model="mainCtrl.models.activeTime" >
-            <input type="text" ng-model="mainCtrl.models.shortBreak" ng-blur="mainCtrl.updateTime('shortBreak', mainCtrl.models.shortBreak)">
-            <input type="text" ng-model="mainCtrl.models.longBreak" ng-blur="mainCtrl.updateTime('longBreak', mainCtrl.models.longBreak)"> -->
 
         </div>
 

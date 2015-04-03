@@ -1,0 +1,99 @@
+// private variables
+$track-width: 100%;
+$track-height: 6px;
+$val: 10;
+
+$knob: $track-height * 2;
+
+$sliders: (
+    active: color(active),
+    shortBreak: color(green),
+    longBreak: color(green)
+);
+
+@mixin track() {
+    width: $track-width;
+    height: $track-height;
+    background: color(toggleGrey);
+    border-radius: $track-height / 2;
+}
+
+@mixin knob() {
+    border: none;
+    width: $knob;
+    height: $knob;
+    border-radius: 50%;
+    box-shadow: (0 0 .125em #333);
+    background: #fff;
+    margin-top: - $knob / 4;
+    cursor: pointer;
+}
+
+.pomodoro__range {
+
+    &,
+    &::-webkit-slider-runnable-track,
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+    }
+    width: 80%;
+
+    &::-webkit-slider-runnable-track {
+        @include track();
+    }
+
+    &::-moz-range-track {
+        @include track();
+    }
+
+    // loop over every slider type and set background
+    @each $slider, $sliderBg in $sliders {
+        &--#{$slider}::-webkit-slider-runnable-track {
+            background: linear-gradient($sliderBg, $sliderBg) no-repeat color(toggleGrey);
+        }
+    }
+
+    &::-ms-track {
+        border: none;
+        @include track();
+        color: transparent;
+    }
+
+    &::-ms-fill-lower {
+        border-radius: $track-height / 2;
+        background: color(active);
+    }
+
+    &::-webkit-slider-thumb {
+        @include knob();
+    }
+
+    &::-ms-tooltip { display: none; }
+
+    &:focus {
+        border: none;
+        outline: none;
+    }
+
+}
+
+.pomodoro {
+
+    &__label,
+    &__time {
+        @include font-size(14);
+        color: darken(color(toggleGrey), 25%);
+    }
+
+    &__time {
+        margin-left: 20px;
+        text-align: right;
+    }
+
+}
+
+.pomodoro-range {
+    &__container {
+        margin: 15px 0;
+    }
+}
