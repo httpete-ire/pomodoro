@@ -148,8 +148,14 @@
         };
 
         vm.updateTime = function(type, newTime) {
-            // check if new time is a valid number
             TimerSettings.setTime(type, newTime);
+
+            // if time is paused update the time, otherwise wait till next timer
+            if (!vm.states.started) {
+                vm.time = TimeParser.parse(vm.pomodoro.getDuration());
+                // call the digest cycle to update the timer
+                $scope.$apply();
+            }
         };
 
         // listen for typeChange events and update the background
