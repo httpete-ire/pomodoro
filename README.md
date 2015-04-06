@@ -1,6 +1,8 @@
 # pomodoro
 a simple pomodoro timer app build using Angular and web workers
 
+![Image of the app](https://cloud.githubusercontent.com/assets/1556430/7013191/2e438bea-dcaf-11e4-842e-de9d5e73fa28.png)
+
 [view app](http://httpete.com/pomodoro/)
 
 ### pomodoro
@@ -24,5 +26,6 @@ Web workers allow any script to run in a background thread and are not effected 
 ### todo
 
 - [x] audio when complete
-- [ ] ability to changes the settings
+- [x] ability to changes the settings
 - [x] add HTML 5 notifications
+- [x] custom input ranges to change time
