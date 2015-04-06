@@ -11,6 +11,8 @@
      * @description bind a listener to a spacebar keydown
      * @restrict A
      * @scope
+     * @requires '$document'
+     * @author Peter Redmond https://github.com/httpete-ire
      *
      * @ngInject
      */
@@ -26,8 +28,14 @@
             link: link
         };
 
+        /**
+         * link function to bind listeners to keydown events on
+         * the
+         *
+         * @param  {Object} scope
+         */
         function link(scope) {
-            $document.bind('keydown', function(e) {
+            $document.on('keydown', function(e) {
                 if (e.keyCode === SPACE_KEY) {
                     scope.listener();
                     scope.$apply();

@@ -17,11 +17,22 @@ self.onmessage = function(e) {
     }
 };
 
+/**
+ * start the web worker timer for a specific time, after every second
+ * the tick message is sent to the window causing a callback to execute,
+ * when the time reaches 0 the complete message is sent back to the
+ * window
+ *
+ * if a time is not provided as a parameter it will use the existing time,
+ * this is used when a timer is paused and it is started. it simply resumes
+ * the timer with the remaining time
+ *
+ * @param  {Number} value : time to set timer to
+ */
 function startTimer(value) {
 
     var SECOND = 1000;
 
-    // if time is not passed we continue the countdown with the time
     time = value || time;
 
     timer = setInterval(function() {
@@ -37,8 +48,6 @@ function startTimer(value) {
                 message: 'complete'
             });
 
-            // set tick and call callback function
-            //  clearTimer
             clearTimer();
         }
 
@@ -52,14 +61,15 @@ function startTimer(value) {
     });
 }
 
+/**
+ * if a timer interval is set clear it and set to null
+ */
 function clearTimer() {
 
     if (!timer) {
         return;
     }
 
-    // stop the timer and set to null
     clearInterval(timer);
     timer = null;
-
 }

@@ -3,12 +3,11 @@
     'use strict';
 
     /**
-     * @ngdoc overview
-     * @name pomodoro module
-     * @author generator-ng-gulp
-     *
+     * @ngdoc pomodoro
+     * @name pomodoro.module
+     * @author Peter Redmond https://github.com/httpete-ire
      * @description
-     * Main module of the application.
+     * main module for them pomodoro
      */
     angular
     .module('pomodoro', []);

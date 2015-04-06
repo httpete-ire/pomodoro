@@ -11,6 +11,8 @@
      * @description iOS like toggle for settings
      * @restrict E
      * @scope
+     * @author Peter Redmond https://github.com/httpete-ire
+     * ngInject
      */
     function toggle() {
         return {

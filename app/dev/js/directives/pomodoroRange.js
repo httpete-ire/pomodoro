@@ -5,11 +5,14 @@
         .module('pomodoro')
         .directive('pomodoroRange',pomodoroRange);
 
-    // .pomodoro__range--active::-webkit-slider-runnable-track
-
     /**
      * @ngdoc directive
-     *
+     * @name pomodoro.directive: pomodoroRange
+     * @description custom range input with listeners for 'input' and
+     * 'change' events
+     * @restrict A 'E' eg. <pomodoro-range></pomodoro-range>
+     * @scope
+     * @author Peter Redmond https://github.com/httpete-ire
      */
     function pomodoroRange() {
 
@@ -27,24 +30,31 @@
                 max:    '@',
                 step:   '@',
                 label:  '@',
-                time:   '=',
                 timer:  '@',
+                time:   '=',
                 update: '&'
             },
             template: template,
             link: link
         }
 
+        /**
+         * link function for directive, bind 'input' and 'change'
+         * events on the range input to update the pomodoro time
+         *
+         * @param  {Object} scope
+         * @param  {Object} elem
+         * @param  {Object} attr
+         */
         function link(scope, elem, attr) {
             var input = elem.find('input');
-            var min = attr['min'];
-            var max = attr['max'];
 
-            scope.perc = calcPercent(min, max, scope.time);
+            // set the percentage of the timer range input
+            scope.perc = calcPercent(scope.min, scope.max, scope.time);
 
             // calculate the percentage of the slider
             input.on('input', function(e) {
-                scope.perc = calcPercent(min, max, this.value);
+                scope.perc = calcPercent(scope.min, scope.max, this.value);
                 scope.$apply();
             });
 

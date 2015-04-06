@@ -7,11 +7,11 @@
     .service('Timer', Timer);
 
     /**
-     * @ngdoc function
+     * @ngdoc pomodoro
      * @name pomodoro.service: Timer
-     *
+     * @author Peter Redmond https://github.com/httpete-ire
      * @description
-     * Service of the pomodoro
+     * controller to handle the web worker timer
      *
      * @ngInject
      */
@@ -24,15 +24,20 @@
 
         var started = false;
 
+        return {
+            startTimer: startTimer,
+            clearTimer: clearTimer,
+            isActive: isActive
+        };
+
         /**
          * start the timer and then handle the web workers response,
          * 'tick' : invokes the callback function every second
          * 'complete' : invokes the complete function when the timer is done
          *
          * @param  {Object} config
-         *
          */
-        _timer.startTimer = function(config) {
+        function startTimer(config) {
 
             worker.postMessage({
                 command: 'start',
@@ -57,13 +62,12 @@
 
             };
 
-        };
+        }
 
         /**
-         * send a message to the web worker to clear the timer
-         *
+         * if a timer has been started clear it
          */
-        _timer.clearTimer = function() {
+        function clearTimer() {
             // only clear an active timer
             if (!started) {
                 return;
@@ -76,17 +80,16 @@
             worker.onmessage = function(e) {
                 started = !e.data.cleared;
             };
-        };
+        }
 
         /**
-         * return if the timer has started
-         *
+         * return if the timer is active or not
          */
-        _timer.isActive = function() {
+        function isActive() {
             return started;
-        };
+        }
 
-        return _timer;
+
     }
 
 })();

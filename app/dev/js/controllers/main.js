@@ -9,9 +9,10 @@
     /**
      * @ngdoc function
      * @name pomodoro.controller: MainCtrl
-     *
-     * @description
-     * Controller of the pomodoro
+     * @requires 'Pomodoro', '$scope', 'TimeParser', 'TimerSettings'
+     * @description store the UI states and models and bind functions for
+     * updating times and settings notifications
+     * @author Peter Redmond https://github.com/httpete-ire
      *
      * @ngInject
      */
@@ -38,6 +39,9 @@
             count: 0
         };
 
+        /**
+         * set up the Pomodoro object and the UI states
+         */
         vm.init = function() {
 
             // create a new instance of the pomodoro object
@@ -53,25 +57,36 @@
             vm.states.allowNotifactions = vm.pomodoro.noticaftions();
 
             // set btn text
-            vm.timerState = vm.setBtn();
+            vm.timerState = vm.setTimerState();
 
             // set weither the timer should notify when complete
             vm.pomodoro.allowNotifaction(vm.models.desktopNotification, vm.models.audioNotifications);
         };
 
-        // return if the timer is active or not
+        /**
+         * @return {Boolean} return if the timer is active or not
+         */
         vm.isPaused = function() {
             return vm.states.btn === 'paused';
         };
 
-        // set the time on the view
-        // parse the time so it is formatted correctly
+        /**
+         * set the parse time on the view so it is
+         * formatted correctly
+         *
+         * @param {Number} value : time to parse
+         */
         vm.setTime = function(value) {
             vm.time = TimeParser.parse(value);
             $scope.$apply();
         };
 
-        // toggle the timer from start to pause
+
+        /**
+         * if the timer is new then start it, otherwise pause it, if already
+         * paused then resume the current timer, also set the state of
+         * the UI
+         */
         vm.toggleTimer = function() {
 
             if (!vm.states.started) {
@@ -99,11 +114,13 @@
             }
 
             // set btn text
-            vm.timerState = vm.setBtn();
+            vm.timerState = vm.setTimerState();
         };
 
-        // set text on btn depedning on the app state
-        vm.setBtn = function() {
+        /**
+         * set the UI state depending on the app state
+         */
+        vm.setTimerState = function() {
 
             // if timer is new
             if (!vm.states.started) {
@@ -113,14 +130,25 @@
             return (!vm.states.paused) ? 'pause' : 'resume';
         };
 
+        /**
+         * open or close the settings panel
+         */
         vm.toggleSettings = function() {
             vm.states.settings = !vm.states.settings;
         };
 
+        /**
+         * force close the settings panel
+         */
         vm.closeSettings = function() {
             vm.states.settings = false;
         };
 
+        /**
+         * ask the user to grant permission for desktop notifactions, store
+         * the result in localStorage and tell the pomodoro to either allow or
+         * disallow both desktop and audio notifcations
+         */
         vm.allowDesktopNotifications = function() {
             // ask the user to allow desktop notifications
             vm.pomodoro._notifier.grantPermission();
@@ -132,6 +160,11 @@
             vm.pomodoro.allowNotifaction(vm.models.desktopNotification);
         };
 
+        /**
+         * toggle to allow audio notifactions when timer complete, store
+         * the result in localStorage and notify pomodoro to either
+         * allow audio notifactions
+         */
         vm.toggleAudioNotifications = function() {
 
             TimerSettings.setNotification('audio', vm.models.audioNotifications);
@@ -139,21 +172,31 @@
             vm.pomodoro._audioNotification = vm.models.audioNotifications;
         };
 
-        vm.reset = function() {
-            vm.pomodoro.reset();
+        /**
+         * restart the current timer without incrementing the count
+         */
+        vm.restart = function() {
+            vm.pomodoro.cancelTimer();
 
-            // set the time to that of the pomodoro
+            // update the UI state
+            vm.states.started = false;
+            vm.timerState = vm.setTimerState();
             vm.time = TimeParser.parse(vm.pomodoro.getDuration());
-
         };
 
+        /**
+         * update the time for each pomodoro ('active' eg) and if timer has
+         * not been started updates the UI state, otherwise wait till
+         * the timer has complete before using the new time
+         *
+         * @param  {Sting} type     : timer type eg 'active'
+         * @param  {Number} newTime : time to set
+         */
         vm.updateTime = function(type, newTime) {
             TimerSettings.setTime(type, newTime);
 
-
             // if time is paused update the time, otherwise wait till next timer
             if (!vm.states.started) {
-                console.log(vm.pomodoro.getDuration());
                 vm.time = TimeParser.parse(vm.pomodoro.getDuration());
                 // call the digest cycle to update the timer
                 $scope.$apply();

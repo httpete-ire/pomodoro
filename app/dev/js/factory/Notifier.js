@@ -6,7 +6,14 @@
     .factory('Notifier', Notifier);
 
     /**
-     * [Notifier description]
+     * @ngdoc factory
+     * @name pomodoro.factory: Notifier
+     * @requires '$window', '$timeout'
+     * @description Handles creating audio and desktop notifcations,
+     * messages can be set on the desktop notification
+     * @author Peter Redmond https://github.com/httpete-ire
+     *
+     * ngInject
      */
     function Notifier($window, $timeout) {
 
@@ -17,6 +24,12 @@
             sound: './../../sounds/alarm.mp3'
         };
 
+        /**
+         * the inner object that handles creating
+         * audio and desktop notifcations
+         *
+         * @param  {Object} opts : options object
+         */
         function _notifier(opts) {
             /*jshint validthis:true */
             this.settings = opts || {};
@@ -27,12 +40,14 @@
 
         /**
          * check to see if the browser supports desktop notifications
-         *
          */
         _notifier.prototype.isSupported = function() {
             return 'Notification' in $window;
         };
 
+        /**
+         * set the permissions on the Notification object
+         */
         _notifier.prototype.grantPermission = function() {
 
             var self = this;
@@ -43,6 +58,13 @@
             });
         };
 
+        /**
+         * cerate a new instance of the Notifaction object and set
+         * properties on it, also bind listeners for 'close'
+         * and 'click' events
+         *
+         * @param {String} msg : Message to output to notification
+         */
         _notifier.prototype.setNotifaction = function(msg) {
 
             var self = this;
@@ -72,16 +94,23 @@
 
         };
 
-        // play the alarm
+        /**
+         * play the audio
+         */
         _notifier.prototype.playSound = function() {
             this._audio.play();
         };
 
-        // return if the user granted permission for the notifications
+        /**
+         * return if the user has granted permission for notifications
+         *
+         * @return {boolean}
+         */
         _notifier.prototype.getPermission = function() {
             return this.permission;
         };
 
+        // return constructor for Notifier
         return _notifier;
     }
 

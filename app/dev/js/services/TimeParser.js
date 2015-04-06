@@ -9,20 +9,27 @@
     /**
      * @ngdoc function
      * @name doro.service: TimeParser
-     *
-     * @description
-     * Service of the doro
+     * @author Peter Redmond https://github.com/httpete-ire
+     * @description service to parse a time and format it in the
+     * mm : ss format
      *
      * @ngInject
      */
     function TimeParser() {
 
-        var _TimeParser = {};
 
-        // format a number for the timer
-        // eg "10 : 25"
-        _TimeParser.parse = function(value) {
+        return {
+            parse: parse
+        }
 
+        /**
+         * format the number for the timer so it
+         * displays consistently no mater the time eg 01 : 34
+         *
+         * @param  {Number} value : time to format
+         * @return {String}
+         */
+        function parse(value) {
             if (isNaN(value)) {
                 return '';
             }
@@ -35,20 +42,18 @@
             secs = prefixTime(value - (mins * 60));
 
             return mins + ' : ' + secs;
-        };
+        }
 
-        return _TimeParser;
-    }
+        /**
+         * prefix a 0 to a single digit
+         *
+         * @param  {Number} value
+         * @return {String} prefixed value
+         */
+        function prefixTime(value) {
+            return (value < 10) ? '0' + value : value;
+        }
 
-    /**
-     * prefix a 0 to a single digit
-     *
-     * @param  {Number} value
-     * @return {String} prefixed value
-     *
-     */
-    function prefixTime(value) {
-        return (value < 10) ? '0' + value : value;
     }
 
 })();
