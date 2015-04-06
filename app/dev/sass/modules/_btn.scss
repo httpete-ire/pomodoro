@@ -10,3 +10,11 @@
     @extend %btn;
     color: color(offwhite);
 }
+
+.pomodoro__link {
+    color: color(offwhite);
+    @include font-size(12);
+    cursor: pointer;
+    padding: 7px 45px;
+    text-decoration: underline;
+}

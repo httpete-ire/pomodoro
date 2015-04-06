@@ -6,7 +6,7 @@
 
             <a class="pomodoro__btn" ng-click="mainCtrl.toggleTimer()" ng-show="mainCtrl.isPaused()">{{ mainCtrl.timerState }}</a>
 
-            <a class="pomodoro__btn" ng-click="mainCtrl.restart()" ng-show="mainCtrl.isPaused()">restart</a>
+            <a class="pomodoro__link" ng-click="mainCtrl.restart()" ng-show="mainCtrl.isPaused()">restart</a>
 
             <span class="pomodoro__hint">spacebar to {{ mainCtrl.timerState }} timer</span>
       </div>
