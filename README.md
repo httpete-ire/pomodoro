@@ -7,6 +7,8 @@ a simple pomodoro timer app build using Angular and web workers
 
 ### pomodoro
 
+The pomodoro technique is a time management method for breaking down large tasks into small, timed intervals that are seperated by a short break.
+
 ### how to build
 
 to build the app run the following commands
