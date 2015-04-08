@@ -21,7 +21,8 @@
             title: 'Pomodoro',
             tag: 'pomodoro',
             dismiss: 3000,
-            sound: './../../sounds/alarm.mp3'
+            sound: './../../sounds/alarm.mp3',
+            icon: './../../images/clock.png'
         };
 
         /**
@@ -72,7 +73,8 @@
             // set notifaction
             var n = this._notifaction = new Notification(notifierSettings.title, {
                 body: msg,
-                tag: notifierSettings.tag
+                tag: notifierSettings.tag,
+                icon: notifierSettings.icon
             });
 
             // close notifaction after a timer
