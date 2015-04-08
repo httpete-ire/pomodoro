@@ -116,6 +116,8 @@ gulp.task('jsdev', ['serve'], function(){
     gulp.watch([paths.js], ['lint', 'jscs', browserSync.reload]);
 });
 
+gulp.task('setup', ['sass:dev', 'serve']);
+
 /**
 * inject bower into html, complile sass and inject
 */
