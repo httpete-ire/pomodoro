@@ -1,0 +1,42 @@
+<div class="vertical__align">
+    <div class="pomodoro__container" spacebar-listener listener="mainCtrl.toggleTimer()">
+        <h1>{{mainCtrl.time}}</h1>
+
+        <div class="pomodoro__btns">
+
+            <a class="pomodoro__btn" ng-click="mainCtrl.toggleTimer()" ng-show="mainCtrl.isPaused()">{{ mainCtrl.timerState }}</a>
+
+            <span class="pomodoro__hint">spacebar to {{ mainCtrl.timerState }} timer</span>
+      </div>
+
+    </div>
+</div>
+
+<div class="pomodoro__count">
+    <p>{{mainCtrl.models.count}} <ng-pluralize count="mainCtrl.models.count"when="{'0': 'pomodoros', 'one': 'pomodoro', 'other': 'pomodoros'}">
+  </ng-pluralize> complete</p>
+</div>
+
+<div class="pomodoro__settings" ng-class="{
+    'is-open' : mainCtrl.states.settings
+}">
+
+    <img src="/assets/settings.svg" class="settings__trigger" ng-click="mainCtrl.toggleSettings()">
+
+    <div class="settings__panel">
+
+        <div class="settings__close">
+            <span ng-click="mainCtrl.toggleSettings()">&times;</span>
+        </div>
+
+        <div class="settings__option">
+
+            <toggle notification="mainCtrl.models.desktopNotification" change="mainCtrl.allowDesktopNotifications()" label="Desktop Notifications"></toggle>
+
+            <toggle notification="mainCtrl.models.audioNotifications" change="mainCtrl.toggleAudioNotifications()" label="Audio Notifications" klass="toggle__container--last"></toggle>
+
+        </div>
+
+    </div>
+</div>
+<!-- /.pomodoro__settings -->

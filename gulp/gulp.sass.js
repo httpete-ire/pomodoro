@@ -39,7 +39,8 @@ function sass(opts) {
     .pipe($.sass({
       outputStyle: opts.outputStyle
     }))
-    .pipe($.if(!opts.build, $.sourcemaps.write(), $.header(banner, { package: package })))
-    .pipe(gulp.dest(config.styles.css))
+    .pipe($.if(!opts.build, $.sourcemaps.write()))
+    .pipe($.if(opts.build, $.header(banner, { package: package })))
+    .pipe($.if(!opts.build, gulp.dest(config.styles.css), gulp.dest(config.build)))
   .pipe(browserSync.reload({stream:true}));;
 }

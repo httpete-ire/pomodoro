@@ -1,7 +1,10 @@
 {
   "name": "pomodoro",
   "version": "0.1.0",
-  "dependencies": {},
+  "dependencies": {
+    "angular": "^1.4.0",
+    "angular-mocks": "^1.4.0"
+  },
   "author": "Pete Redmond <https://github.com/httpete-ire>",
   "license": "MIT",
   "devDependencies": {

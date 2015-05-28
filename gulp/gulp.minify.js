@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var $ = plugins = require('gulp-load-plugins')();
 var config = require('./gulp.config').config;
+var banner = require('./gulp.config').banner;
+var package = require('./../package.json');
 
 gulp.task('clean', function() {
     return gulp
@@ -8,11 +10,12 @@ gulp.task('clean', function() {
       .pipe($.clean());
 });
 
-gulp.task('minify', ['clean'], function() {
+gulp.task('minify', function() {
     return gulp
       .src(config.js.client)
       .pipe($.ngAnnotate())
       .pipe($.concat('app.min.js'))
       .pipe($.uglify())
+      .pipe($.header(banner, { package: package }))
       .pipe(gulp.dest(config.build));
 });

@@ -1,20 +1,20 @@
 exports.config =  {
     tests: {
-        public:'./test/**/*.js',
-        server:'',
-        karma:'./karma.conf.js'
+        client: ['./node_modules/angular/angular.js', './node_modules/angular-mocks/angular-mocks.js', './client/app/js/**/*.js', './client/test/**/*.js'],
+        server: '',
+        karma: './karma.conf.js'
     },
     styles: {
-        sass: './app/dev/sass/**/*.scss',
-        css: './app/dist'
+        sass: './client/app/sass/**/*.scss',
+        css: './client/app/css'
     },
     js: {
         server: '',
-        client: './app/dev/js/**/*.js'
+        client: './client/app/js/**/*.js'
     },
-    build: './app/dist',
+    build: './client/build',
     port: 3000,
-    app: './app'
+    app: './client/app/'
 };
 
 exports.banner = [

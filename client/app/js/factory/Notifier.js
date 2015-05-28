@@ -21,8 +21,8 @@
             title: 'Pomodoro',
             tag: 'pomodoro',
             dismiss: 3000,
-            sound: './../../sounds/alarm.mp3',
-            icon: './../../images/clock.png'
+            sound: './../../assets/alarm.mp3',
+            icon: './../../assets/clock.png'
         };
 
         /**
