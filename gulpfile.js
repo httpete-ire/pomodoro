@@ -11,4 +11,4 @@ gulp.task('dev:client',
 
 gulp.task('dev:server', ['lint:server:watch', 'test:server']);
 
-gulp.task('build', ['clean', 'sass:build', 'minify']);
+gulp.task('build', ['sass:build', 'minify', 'ng-template']);

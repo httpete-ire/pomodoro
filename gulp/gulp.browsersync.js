@@ -16,3 +16,12 @@ gulp.task('serve', function() {
         }
     });
 });
+
+gulp.task('serve:build', function() {
+    browserSync({
+        server: {
+            baseDir: config.build
+        }
+    });
+});
+
