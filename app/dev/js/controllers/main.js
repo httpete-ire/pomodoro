@@ -198,6 +198,7 @@
             // if time is paused update the time, otherwise wait till next timer
             if (!vm.states.started) {
                 vm.time = TimeParser.parse(vm.pomodoro.getDuration());
+
                 // call the digest cycle to update the timer
                 $scope.$apply();
             }

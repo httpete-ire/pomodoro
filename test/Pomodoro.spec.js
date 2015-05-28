@@ -1,32 +1,38 @@
-describe('Pomodoro', function () {
+describe('Pomodoro', function() {
 
     var Pomodoro;
-
     var doro;
+    var audioOriginal;
+    var audioMock;
 
     beforeEach(module('pomodoro'));
 
-    beforeEach(inject(function (_Pomodoro_) {
+    beforeEach(inject(function(_Pomodoro_) {
         Pomodoro = _Pomodoro_;
     }));
 
-
     // create a new instance of Pomodoro
-    beforeEach(function () {
-        doro = new Pomodoro(function () {
+    beforeEach(function() {
+        doro = new Pomodoro(function() {
             console.log('working');
         });
+
+        audioOriginal = window.Audio;
+        audioMock = {};
+        window.Audio = function() {
+            return audioMock;
+        };
     });
 
-    it('should be an instance of Pomodoro', function () {
+    it('should be an instance of Pomodoro', function() {
         assert.instanceOf(doro, Pomodoro, 'doro is an instance of Pomodoro');
     });
 
-    it('should be paused when inactive', function () {
+    it('should be paused when inactive', function() {
         expect(doro.isPaused()).to.be.true;
     });
 
-    it('should be active when the start method is called', function () {
+    it('should be active when the start method is called', function() {
         doro.start();
 
         expect(doro.isPaused()).to.be.false;
@@ -34,7 +40,7 @@ describe('Pomodoro', function () {
         expect(doro._timer).to.be.true;
     });
 
-    it('should pause / clear the timer', function () {
+    it('should pause / clear the timer', function() {
         doro.start();
 
         doro.pause();
@@ -44,36 +50,12 @@ describe('Pomodoro', function () {
         expect(doro._timer).to.be.false;
     });
 
-    it('should update the settings', function () {
-
-        expect(doro.getDuration()).to.equal(1500);
-
-         doro.updateSettings({
-            acll: 1
-        });
-
-        expect(doro.getDuration()).to.equal(1500);
-
-        var updatedTimes = {
-            active: 1000,
-            short_break: 100,
-            long_break: 500
-        };
-
-        doro.updateSettings(updatedTimes);
-
-        expect(doro.getDuration()).to.equal(updatedTimes.active);
-
-        expect(doro.updateSettings(10)).to.equal.false;
-
-
-    });
-
-
     // teardown object
-    afterEach(function(){
+    afterEach(function() {
         doro.cancelTimer();
         doro = null;
+
+        // window.Audio = audioOriginal;
     });
 
 });

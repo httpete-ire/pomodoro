@@ -41,6 +41,11 @@
          * @param {Number} value : time to set, eg 25
          */
         function setTime(type, value) {
+
+            if (!angular.isNumber(value)) {
+                return false;
+            }
+
             times[type] = Number(value);
 
             // persist the time data
