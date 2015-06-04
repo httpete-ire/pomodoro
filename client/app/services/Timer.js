@@ -20,7 +20,7 @@
         var _timer = {};
 
         // create a new web worker
-        var worker = new Worker('./js/utility/timer-worker.js');
+        var worker = new Worker('./app/utility/timer-worker.js');
 
         var started = false;
 
