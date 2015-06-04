@@ -19,9 +19,7 @@
   </ng-pluralize> complete</p>
 </div>
 
-<div class="pomodoro__settings" ng-class="{
-    'is-open' : mainCtrl.states.settings
-}">
+<div class="pomodoro__settings" ng-class="{ 'is-open' : mainCtrl.states.settings }" settings-listener listener="mainCtrl.toggleSettings()" open="mainCtrl.states.settings">
 
     <img src="/assets/settings.svg" class="settings__trigger" ng-click="mainCtrl.toggleSettings()">
 
