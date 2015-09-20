@@ -198,13 +198,13 @@
 
                 // check to see if its a long or short break
                 if (this._count % 4 === 0) {
-                    this._notifier.setNotifaction(TimerSettings.getMsg('longBreak'));
+                    this._notifier.setNotifaction(TimerSettings.getMsg('longBreak'), 'break');
                 } else {
-                    this._notifier.setNotifaction(TimerSettings.getMsg('shortBreak'));
+                    this._notifier.setNotifaction(TimerSettings.getMsg('shortBreak'), 'break');
                 }
 
             } else {
-                this._notifier.setNotifaction(TimerSettings.getMsg('active'));
+                this._notifier.setNotifaction(TimerSettings.getMsg('active'), 'active');
             }
 
         };

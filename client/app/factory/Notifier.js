@@ -22,7 +22,8 @@
             tag: 'pomodoro',
             dismiss: 3000,
             sound: './../../assets/alarm.mp3',
-            icon: './../../assets/clock.png'
+            active: './../../assets/active-clock.png',
+            break: './../../assets/break-clock.png'
         };
 
         /**
@@ -66,7 +67,7 @@
          *
          * @param {String} msg : Message to output to notification
          */
-        _notifier.prototype.setNotifaction = function(msg) {
+        _notifier.prototype.setNotifaction = function(msg, icon) {
 
             var self = this;
 
@@ -74,7 +75,7 @@
             var n = this._notifaction = new Notification(notifierSettings.title, {
                 body: msg,
                 tag: notifierSettings.tag,
-                icon: notifierSettings.icon
+                icon: notifierSettings[icon]
             });
 
             // close notifaction after a timer
