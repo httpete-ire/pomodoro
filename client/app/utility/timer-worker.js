@@ -5,6 +5,7 @@
 // store the timer so we can clear it
 var timer = null;
 var time = null;
+var SECOND = 1000;
 
 self.onmessage = function(e) {
     switch (e.data.command) {
@@ -31,9 +32,7 @@ self.onmessage = function(e) {
  */
 function startTimer(value) {
 
-    var SECOND = 1000;
-
-    time = value || time;
+    time = (value) ? value - 1 : time;
 
     timer = setInterval(function() {
 
